@@ -1,0 +1,16 @@
+{
+  "startup_health": "passed",
+  "retail_quality_page": "passed",
+  "wine_model": "20 flags / 400 rows; 11 measurements, default seed 42 and contamination 0.05",
+  "csv_download": "400 rows x 12 columns verified",
+  "anomaly_download": "400 rows x 18 columns verified",
+  "csv_upload": "real retail sample loaded through browser file input",
+  "malformed_csv": "synthetic malformed upload rejected with actionable error",
+  "mobile_viewport": "430 x 932 screenshot captured",
+  "screenshots": [
+    "overview.png",
+    "retail_quality.png",
+    "wine_anomalies.png",
+    "mobile_exports.png"
+  ]
+}

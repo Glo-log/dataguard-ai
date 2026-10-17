@@ -1,0 +1,24 @@
+[server]
+headless = true
+maxUploadSize = 25
+enableXsrfProtection = true
+enableCORS = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#087F6D"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F2F6F7"
+textColor = "#172E3D"
+font = "sans-serif"
+borderColor = "#DBE5E8"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "0.6rem"
+chartCategoricalColors = ["#087F6D", "#E38B39", "#446EC2", "#B65266", "#7259A4"]
+
+[theme.sidebar]
+backgroundColor = "#F2F6F7"

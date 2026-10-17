@@ -1,0 +1,134 @@
+{
+  "audit_date": "2026-10-17",
+  "timezone": "Africa/Tunis",
+  "publication": "Local initial commit prepared; no remote, push, or deployment. Explicit approval required.",
+  "confirmed_fixes": [
+    ".gitattributes preserves LF sample/catalog data through Windows checkouts",
+    "Removed extra blank line at EOF in pyproject.toml",
+    "Updated local-commit and publication documentation"
+  ],
+  "working_features_unchanged": true,
+  "clean_environment": {
+    "python": "3.12.0",
+    "source": "Separate copy of Git candidate files, without raw/processed data or pre-existing caches",
+    "fresh_venv": true,
+    "user_site_packages_enabled": false,
+    "inherited_python_paths_removed": true,
+    "exact_locked_packages": 50,
+    "requirements_git_blob_sha256": "f3daa9c2cef7d0688f9f82752f4b9bcafbd2461242fddabca29355e6f1303572",
+    "pytest": {
+      "tests": 88,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "summary": "88 passed in 50.96s"
+    },
+    "ruff_check": "passed",
+    "ruff_format": "passed",
+    "compileall": "passed",
+    "pip_check": "passed",
+    "sample_workflows": "passed",
+    "browser": {
+      "startup_health": "passed",
+      "retail_quality_page": "passed",
+      "wine_model": "20 flags / 400 rows; 11 measurements, default seed 42 and contamination 0.05",
+      "csv_download": "400 rows x 12 columns verified",
+      "anomaly_download": "400 rows x 18 columns verified",
+      "csv_upload": "real retail sample loaded through browser file input",
+      "malformed_csv": "synthetic malformed upload rejected with actionable error",
+      "mobile_viewport": "430 x 932 screenshot captured",
+      "screenshots": [
+        "overview.png",
+        "retail_quality.png",
+        "wine_anomalies.png",
+        "mobile_exports.png"
+      ]
+    }
+  },
+  "data_reference_revalidation": {
+    "sample_results_match": true,
+    "full_results_match": true
+  },
+  "windows_git_checkout": {
+    "core_autocrlf": true,
+    "sample_sha256_verified": 3,
+    "provenance_content_identical": true,
+    "png_bytes_identical": true
+  },
+  "repository_review": {
+    "secret_pattern_matches": [],
+    "secret_patterns_checked": [
+      "AWS access identifier",
+      "GitHub credential",
+      "OpenAI credential",
+      "Slack credential",
+      "Private key block",
+      "Embedded URL credential",
+      "Assigned credential"
+    ],
+    "ignore_probes_passed": [
+      ".env",
+      ".env.local",
+      ".streamlit/secrets.toml",
+      ".venv/pyvenv.cfg",
+      ".pytest_cache/v/cache",
+      ".ruff_cache/test",
+      "data/raw/online_retail/online_retail.zip",
+      "data/processed/online_retail.csv",
+      "reports/local/browser_smoke.json",
+      "artifacts/tmp/publication-audit/clean-source/.venv/pyvenv.cfg",
+      "scratch.db",
+      "scratch.sqlite3",
+      "app/__pycache__/state.pyc"
+    ],
+    "broken_local_markdown_links": [],
+    "largest_candidate_file_bytes": 215741,
+    "raw_full_datasets_excluded": true,
+    "readme_screenshot_links": [
+      "assets/screenshots/overview.png",
+      "assets/screenshots/retail_quality.png",
+      "assets/screenshots/wine_anomalies.png"
+    ],
+    "screenshot_method": "Original PNGs were produced by scripts.browser_smoke using Chrome Page.captureScreenshot; reviewed visually and workflow recaptured from the clean environment.",
+    "screenshots": {
+      "mobile_exports.png": {
+        "dimensions": [
+          430,
+          932
+        ],
+        "sha256": "b142da005486b63a1211d6cdd83762b91dfaed5a2190f396a492d4cfd0ef523d",
+        "png_metadata_keys": []
+      },
+      "overview.png": {
+        "dimensions": [
+          1480,
+          1150
+        ],
+        "sha256": "27fe23e91d9b462d7cb141ff00341fb2b3157ba603ec9abde3e9f264a075d157",
+        "png_metadata_keys": []
+      },
+      "retail_quality.png": {
+        "dimensions": [
+          1480,
+          1150
+        ],
+        "sha256": "1672b68ea70e7b0461ded50dba7840ef6d20e02499de985c5f0973c18452d13a",
+        "png_metadata_keys": []
+      },
+      "wine_anomalies.png": {
+        "dimensions": [
+          1480,
+          1150
+        ],
+        "sha256": "b502540001edde2809a98d6e83206485db467f4bb550a861c4f71445bd58a30b",
+        "png_metadata_keys": []
+      }
+    }
+  },
+  "remaining_external_checks": [
+    "Remote GitHub Actions run",
+    "Actual Community Cloud deployment",
+    "Other platforms/browsers and production load",
+    "External security assessment"
+  ]
+}

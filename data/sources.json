@@ -1,0 +1,24 @@
+{
+  "online_retail": {
+    "dataset_id": 352,
+    "source": "https://archive.ics.uci.edu/dataset/352/online+retail",
+    "doi": "https://doi.org/10.24432/C5BW33",
+    "citation": "Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "download_url": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
+    "sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+    "members": ["Online Retail.xlsx"]
+  },
+  "wine_quality": {
+    "dataset_id": 186,
+    "source": "https://archive.ics.uci.edu/dataset/186/wine+quality",
+    "doi": "https://doi.org/10.24432/C56S3T",
+    "citation": "Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). Wine Quality [Dataset]. UCI Machine Learning Repository.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "download_url": "https://archive.ics.uci.edu/static/public/186/wine+quality.zip",
+    "sha256": "3ed56667f4b828242bd732d7d1dd7f2861e54432239d7fa63877014cbb0304d4",
+    "members": ["winequality-red.csv", "winequality-white.csv", "winequality.names"]
+  }
+}

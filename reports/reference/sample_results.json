@@ -1,0 +1,456 @@
+{
+  "scope": "bundled coverage samples",
+  "seed": 42,
+  "contamination": 0.05,
+  "interpretation": "All counts are measured by this script. Quality findings are rule violations or review context; statistical anomalies are not confirmed errors. No anomaly accuracy is measured. Sample rates are not population estimates.",
+  "retail": {
+    "rows": 1200,
+    "columns": 8,
+    "missing_cells": 336,
+    "duplicate_rows": 1,
+    "numeric_columns": [
+      "Quantity",
+      "UnitPrice"
+    ],
+    "categorical_columns": [
+      "InvoiceNo",
+      "StockCode",
+      "Description",
+      "InvoiceDate",
+      "CustomerID",
+      "Country"
+    ],
+    "memory_bytes": 461795,
+    "file_sha256": "925fa328a6babed1572862a3d9f3b264956604e6eecf4e69968483744aad8681",
+    "quality": {
+      "rows": 1200,
+      "columns": 8,
+      "score": 98.58,
+      "indicators": {
+        "completeness": 0.965,
+        "uniqueness": 0.9991666666666666,
+        "validity": 0.9998445273631841,
+        "validity_evaluated": 12864,
+        "validity_failed": 2
+      },
+      "findings": [
+        {
+          "category": "completeness",
+          "rule": "missing",
+          "column": "Description",
+          "severity": "warning",
+          "count": 22,
+          "row_positions": [
+            85,
+            170,
+            261,
+            319,
+            325,
+            326,
+            367,
+            370,
+            397,
+            426,
+            436,
+            459,
+            488,
+            532,
+            613,
+            618,
+            655,
+            673,
+            695,
+            750
+          ],
+          "recommendation": "Check source availability; impute only with a justified policy."
+        },
+        {
+          "category": "completeness",
+          "rule": "missing",
+          "column": "CustomerID",
+          "severity": "warning",
+          "count": 314,
+          "row_positions": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            15,
+            25,
+            33,
+            34,
+            35,
+            36,
+            37,
+            40,
+            46,
+            50,
+            56,
+            58,
+            71,
+            72,
+            73
+          ],
+          "recommendation": "Check source availability; impute only with a justified policy."
+        },
+        {
+          "category": "uniqueness",
+          "rule": "exact_duplicate",
+          "column": "*",
+          "severity": "warning",
+          "count": 1,
+          "row_positions": [
+            1
+          ],
+          "recommendation": "Review repeated rows before removing copies; identical transactions can be legitimate."
+        },
+        {
+          "category": "validity",
+          "rule": "below_minimum",
+          "column": "UnitPrice",
+          "severity": "warning",
+          "count": 2,
+          "row_positions": [
+            663,
+            664
+          ],
+          "recommendation": "Review values below configured minimum 0."
+        },
+        {
+          "category": "potential_outliers",
+          "rule": "iqr_1.5",
+          "column": "Quantity",
+          "severity": "info",
+          "count": 131,
+          "row_positions": [
+            22,
+            59,
+            68,
+            82,
+            85,
+            96,
+            112,
+            119,
+            120,
+            121,
+            130,
+            131,
+            135,
+            140,
+            146,
+            151,
+            159,
+            161,
+            180,
+            181
+          ],
+          "recommendation": "Statistical tail observation; investigate context. Not a confirmed error."
+        },
+        {
+          "category": "potential_outliers",
+          "rule": "iqr_1.5",
+          "column": "UnitPrice",
+          "severity": "info",
+          "count": 98,
+          "row_positions": [
+            4,
+            7,
+            20,
+            35,
+            39,
+            43,
+            74,
+            75,
+            80,
+            86,
+            106,
+            128,
+            155,
+            162,
+            167,
+            196,
+            213,
+            229,
+            231,
+            236
+          ],
+          "recommendation": "Statistical tail observation; investigate context. Not a confirmed error."
+        },
+        {
+          "category": "business_context",
+          "rule": "cancellation",
+          "column": "InvoiceNo",
+          "severity": "info",
+          "count": 42,
+          "row_positions": [
+            13,
+            54,
+            98,
+            116,
+            161,
+            165,
+            167,
+            200,
+            231,
+            236,
+            263,
+            269,
+            317,
+            362,
+            388,
+            425,
+            448,
+            453,
+            476,
+            509
+          ],
+          "recommendation": "Cancellation marker; retain for return/cancellation analysis."
+        },
+        {
+          "category": "business_context",
+          "rule": "negative_quantity",
+          "column": "Quantity",
+          "severity": "info",
+          "count": 63,
+          "row_positions": [
+            13,
+            54,
+            85,
+            98,
+            116,
+            161,
+            165,
+            167,
+            170,
+            200,
+            231,
+            236,
+            261,
+            263,
+            269,
+            317,
+            319,
+            325,
+            326,
+            362
+          ],
+          "recommendation": "May represent returns, cancellations, or stock adjustments; not automatically invalid."
+        },
+        {
+          "category": "business_context",
+          "rule": "zero_price",
+          "column": "UnitPrice",
+          "severity": "info",
+          "count": 33,
+          "row_positions": [
+            36,
+            83,
+            85,
+            170,
+            244,
+            261,
+            319,
+            325,
+            326,
+            367,
+            370,
+            397,
+            417,
+            426,
+            434,
+            436,
+            459,
+            488,
+            494,
+            532
+          ],
+          "recommendation": "May be a promotion or adjustment; inspect source context."
+        }
+      ],
+      "rules": {
+        "InvoiceNo": {
+          "dtype": "string",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "StockCode": {
+          "dtype": "string",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "Description": {
+          "dtype": "string",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "Quantity": {
+          "dtype": "integer",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "InvoiceDate": {
+          "dtype": "date",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "UnitPrice": {
+          "dtype": "numeric",
+          "required": true,
+          "minimum": 0,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "CustomerID": {
+          "dtype": "string",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        },
+        "Country": {
+          "dtype": "string",
+          "required": true,
+          "minimum": null,
+          "maximum": null,
+          "allowed": null,
+          "date_format": "ISO8601"
+        }
+      },
+      "methodology": "Project score: weighted mean of completeness (0.4), uniqueness (0.2), validity (0.4). Completeness=1-missing cells/all cells; uniqueness=1-duplicate rows after first/all rows; validity=1-failed/evaluated rule opportunities. Validity checks exclude missing cells; absent required columns fail one schema opportunity. Unavailable categories are omitted and weights renormalized. IQR and retail context flags are excluded. Not an industry standard or a guarantee."
+    },
+    "sql_eligibility": {
+      "source_rows": 1200,
+      "eligible_rows": 1198,
+      "excluded_rows": 2,
+      "source_missing_customer_rows": 314,
+      "source_duplicate_rows": 1
+    },
+    "sql_queries_verified": {
+      "select_transactions": 100,
+      "filter_returns": 54,
+      "country_totals": 24,
+      "customer_join": 100,
+      "monthly_cte": 13,
+      "running_totals": 13,
+      "quality_summary": 5
+    }
+  },
+  "wine": {
+    "red": {
+      "rows": 400,
+      "columns": 12,
+      "missing_cells": 0,
+      "duplicate_rows": 17,
+      "numeric_columns": [
+        "fixed_acidity",
+        "volatile_acidity",
+        "citric_acid",
+        "residual_sugar",
+        "chlorides",
+        "free_sulfur_dioxide",
+        "total_sulfur_dioxide",
+        "density",
+        "ph",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "categorical_columns": [],
+      "memory_bytes": 38532,
+      "file_sha256": "93039a3da334ed845eb875d16e34b39b7addb8bb5cf31f664d2663659f486265",
+      "features": [
+        "fixed_acidity",
+        "volatile_acidity",
+        "citric_acid",
+        "residual_sugar",
+        "chlorides",
+        "free_sulfur_dioxide",
+        "total_sulfur_dioxide",
+        "density",
+        "ph",
+        "sulphates",
+        "alcohol"
+      ],
+      "parameters": {
+        "contamination": 0.05,
+        "random_state": 42,
+        "n_estimators": 200,
+        "imputation": "median",
+        "scoring": "in-sample",
+        "infinite_values": "treated as missing for modeling only"
+      },
+      "flagged_records": 20,
+      "flagged_pct": 5.0,
+      "scores_finite": true,
+      "repeat_run_identical": true,
+      "ground_truth_error_labels": null
+    },
+    "white": {
+      "rows": 400,
+      "columns": 12,
+      "missing_cells": 0,
+      "duplicate_rows": 8,
+      "numeric_columns": [
+        "fixed_acidity",
+        "volatile_acidity",
+        "citric_acid",
+        "residual_sugar",
+        "chlorides",
+        "free_sulfur_dioxide",
+        "total_sulfur_dioxide",
+        "density",
+        "ph",
+        "sulphates",
+        "alcohol",
+        "quality"
+      ],
+      "categorical_columns": [],
+      "memory_bytes": 38532,
+      "file_sha256": "72fe6c20b1bb1f708ad8ee9907f0314f3efb69b6792941db546ed2971ab7228c",
+      "features": [
+        "fixed_acidity",
+        "volatile_acidity",
+        "citric_acid",
+        "residual_sugar",
+        "chlorides",
+        "free_sulfur_dioxide",
+        "total_sulfur_dioxide",
+        "density",
+        "ph",
+        "sulphates",
+        "alcohol"
+      ],
+      "parameters": {
+        "contamination": 0.05,
+        "random_state": 42,
+        "n_estimators": 200,
+        "imputation": "median",
+        "scoring": "in-sample",
+        "infinite_values": "treated as missing for modeling only"
+      },
+      "flagged_records": 20,
+      "flagged_pct": 5.0,
+      "scores_finite": true,
+      "repeat_run_identical": true,
+      "ground_truth_error_labels": null
+    }
+  }
+}
