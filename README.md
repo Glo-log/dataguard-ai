@@ -1,158 +1,192 @@
 # DataGuard AI
 
-**Automated data quality assessment and anomaly review, with explicit rules and traceable cleaning.**
+**A simple way to check, clean, and understand your data before using it.**
 
-DataGuard AI helps an analyst inspect a CSV before relying on it: identify missingness and repeats, configure validity rules, explore distributions, screen numerical observations, preview cleaning, and export a documented result. It is an independent Python portfolio project built for review, not a production data governance service.
+DataGuard AI is a Python-based data analysis application I built to make data quality checks easier and more practical.
 
-## What works
+Real-world datasets are rarely perfect. They often contain missing values, duplicates, inconsistent entries, and unusual observations. DataGuard AI brings the tools needed to explore these problems into one interactive dashboard.
 
-- Eight Streamlit pages: Overview, Dataset explorer, Data quality report, Exploratory data analysis, Anomaly detection, Data cleaning, SQL analytics, and Export results.
-- Bounded CSV upload with explicit encodings/separators, malformed-record detection, identifier preservation, and descriptive profiling.
-- Configurable types, numeric ranges, dates, allowed categories, and required columns; transparent score, severity, positional examples, and remediation suggestions.
-- Plotly distributions, boxplots, missingness, correlations, frequencies, and outlier summaries.
-- Reproducible median-imputation + Isolation Forest pipeline, feature exclusions, scores, labels, and configurable contamination/seed.
-- Cleaning previews and explicit adoption, revision-aware transformation history, immutable source copy, and original-data restore.
-- Isolated SQLite analytics with SELECT, WHERE, GROUP BY, LEFT JOIN, CTE, window functions, and quality summaries.
-- Current dataset, quality CSV/JSON, anomaly CSV/settings, and transformation-log exports.
-- Official UCI downloads with pinned checksums, Excel-to-CSV conversion, real coverage samples, and offline tests.
+The goal is simple: **help users understand their data, identify potential issues, and make better decisions before analysis.**
 
-**Anomaly flags are observations for investigation, not confirmed errors. No anomalies are automatically deleted.**
+## Features
 
-## See the application
+- **Data Overview:** Get a quick summary of your dataset, including its size, columns, and data types.
+- **Data Quality Checks:** Find missing values, duplicate records, and values that don't follow defined rules.
+- **Exploratory Data Analysis:** Explore distributions, correlations, and trends through interactive charts.
+- **Anomaly Detection:** Use Isolation Forest to identify unusual numerical observations worth investigating.
+- **Data Cleaning:** Preview and apply cleaning operations while keeping the original data available.
+- **SQL Analytics:** Run SQL queries to explore and summarize data.
+- **Export Results:** Download cleaned datasets, quality reports, anomaly results, and transformation history.
 
-These images are captured from the actual local application; no deployment is claimed.
+The application includes eight Streamlit pages covering these features.
 
-![Overview with retail quality and missingness indicators](assets/screenshots/overview.png)
+## Application Preview
 
-![Retail validation report with explicit scoring methodology](assets/screenshots/retail_quality.png)
+Here are a few screenshots of DataGuard AI in action.
 
-![Wine anomaly screening using physicochemical measurements](assets/screenshots/wine_anomalies.png)
+### Dashboard Overview
 
-## Setup on Windows
+![Dashboard Overview](assets/screenshots/overview.png)
 
-Use Python **3.12** and run all commands from the repository root. The project was verified on Windows with Python 3.12.0; `requirements.txt` pins direct and transitive versions, including Streamlit 1.66.0, Pandas 2.3.3, NumPy 2.5.4, scikit-learn 1.9.1, and Plotly 6.9.0.
+### Data Quality Report
+
+![Data Quality Report](assets/screenshots/retail_quality.png)
+
+### Anomaly Detection
+
+![Anomaly Detection](assets/screenshots/wine_anomalies.png)
+
+## Technologies Used
+
+| Technology     | Purpose                                  |
+| -------------- | ---------------------------------------- |
+| Python         | Main programming language                |
+| Streamlit      | Interactive web application              |
+| Pandas & NumPy | Data processing and analysis             |
+| Plotly         | Interactive data visualization           |
+| Scikit-learn   | Anomaly detection using Isolation Forest |
+| SQLite         | SQL-based data analysis                  |
+| Pytest         | Automated testing                        |
+| Ruff           | Code quality checks                      |
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd dataguard-ai
+```
+
+Replace `<your-repository-url>` with the actual GitHub repository URL.
+
+### 2. Create a virtual environment
+
+Make sure Python 3.12 is installed.
 
 ```powershell
-python -m venv .venv
+py -3.12 -m venv .venv
+```
+
+### 3. Install the dependencies
+
+On Windows:
+
+```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+### 4. Run the application
+
+```powershell
 .\.venv\Scripts\python.exe -m streamlit run app/main.py
 ```
 
-The demo works immediately using the committed samples, without downloading full datasets or requiring credentials. Direct virtual-environment commands avoid PowerShell activation-policy changes. On macOS/Linux use `.venv/bin/python` instead of `.\.venv\Scripts\python.exe`.
+Open the local address shown in the terminal, usually:
 
-`requirements.in` lists direct dependency constraints for deliberate upgrades; ordinary setup uses the exact `requirements.txt`. The app resolves project paths relative to its files and has no machine-specific runtime path dependency.
+http://localhost:8501
 
-Clean setup was independently verified in a copied source tree with a fresh Python 3.12 virtual environment, user site packages disabled, and no raw datasets or existing caches. All 50 locked packages installed, all 88 tests passed, and the real Streamlit browser workflow ran successfully. `.gitattributes` preserves LF text endings so dataset checksums remain valid after Windows Git checkouts.
+If Windows blocks the virtual environment inside the project folder, you can create one in another permitted location and use its Python executable instead.
 
-## Suggested demo workflow
+## Datasets
 
-1. Start with **Online Retail · primary**. Inspect missing customer IDs, missing descriptions, repeated records, return/cancellation context, and negative-price rule findings.
-2. Open Data quality report to inspect the scoring formula and JSON rule configuration. Negative quantities are permitted; cancellations and zero prices are context flags.
-3. Use EDA to inspect distributions and category frequencies. Preview removing the one repeated sample row, then explicitly apply it. Restore the original when finished.
-4. Open SQL analytics and compare the group, join, CTE, and window examples. Sample net line values describe the sample only.
-5. Switch to **Wine Quality · red** or **Wine Quality · white**, open Anomaly detection, and run the default model. It uses 11 measurements, excludes the quality rating, and reports scores for every observation.
-6. Export the accepted current revision, findings, model results, and transformation history. Pending cleaning previews are excluded. Applying cleaning or switching datasets clears stale model results.
+I used two publicly available datasets from the UCI Machine Learning Repository to test the application.
 
-## Dataset reproduction
+### Online Retail Dataset
 
-| Dataset | Full rows × columns | Bundled rows | Source and license |
-|---|---:|---:|---|
-| Online Retail | 541,909 × 8 | 1,200 | [UCI 352](https://archive.ics.uci.edu/dataset/352/online+retail), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| Wine Quality, red | 1,599 × 12 | 400 | [UCI 186](https://archive.ics.uci.edu/dataset/186/wine+quality), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
-| Wine Quality, white | 4,898 × 12 | 400 | Same source and license |
+Contains real transaction records from an online retailer.
 
-Credit: Chen, D. (2015), Online Retail, DOI [10.24432/C5BW33](https://doi.org/10.24432/C5BW33); Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009), Wine Quality, DOI [10.24432/C56S3T](https://doi.org/10.24432/C56S3T).
+I used it to explore:
 
-```powershell
-.\.venv\Scripts\python.exe -m scripts.download_data
-.\.venv\Scripts\python.exe -m scripts.preprocess_data
-.\.venv\Scripts\python.exe -m scripts.validate_demos --output-dir reports/local
-.\.venv\Scripts\python.exe -m scripts.validate_demos --full --output-dir reports/local
-```
+- Missing customer information
+- Duplicate transactions
+- Invalid or unusual values
+- Sales and transaction patterns
+- Data quality rules
 
-Retail is converted from Excel with all rows retained; wine's semicolon CSVs become separate comma CSVs with normalized headers. No imputation, filtering, or correction occurs in this conversion. Samples are real source-row subsets, generated with seed 42 and enriched for varied cases. They are not unbiased population samples. Exact source positions, transformations, and file hashes are recorded in `data/sample/provenance.json`.
+### Wine Quality Dataset
 
-Raw archives and complete converted data remain local and are Git-ignored. The full retail CSV exceeds the interactive upload row limit, so full-data evaluation uses the CLI. See [dataset methodology and recovery instructions](docs/DATASETS.md) and [data attribution](data/LICENSE_DATA.md).
+Contains physicochemical measurements of red and white wines.
 
-## Verified results
+I used it to:
 
-Measured from the downloaded sources using the committed scripts and dependency lock:
+- Explore numerical features
+- Visualize distributions and correlations
+- Detect unusual observations using Isolation Forest
 
-| Check | Full source-derived data | Bundled sample |
-|---|---:|---:|
-| Retail records | 541,909 | 1,200 |
-| Missing retail CustomerID | 135,080 | 314 |
-| Missing retail Description | 1,454 | 22 |
-| Repeated retail rows after first occurrence | 5,268 | 1 |
-| Retail negative-price rule findings | 2 | 2 |
-| Wine red flagged observations | 80 / 1,599 | 20 / 400 |
-| Wine white flagged observations | 245 / 4,898 | 20 / 400 |
+**Dataset sources:**
 
-Wine counts use 200 trees, contamination 0.05, seed 42, separate cohorts, and the 11 measurements. Repeated fits produced identical scores/labels in the tested environment. These counts do not measure detection accuracy or confirmed data errors. Imbalanced ratings are retained as metadata and excluded from model features.
+- [Online Retail — UCI](https://archive.ics.uci.edu/dataset/352/online+retail)
+- [Wine Quality — UCI](https://archive.ics.uci.edu/dataset/186/wine+quality)
 
-Full retail has 10,624 negative-quantity rows and 9,288 cancellation-marked rows. These context categories can overlap and are retained. The project score is 98.55 despite substantial CustomerID missingness; aggregate satisfaction can dilute important field-level issues. Always inspect findings, not just the score.
+Both datasets are provided under CC BY 4.0. The repository includes smaller samples so the application can be explored without downloading the full datasets.
 
-Machine-readable evidence: [full results](reports/reference/full_results.json) and [sample results](reports/reference/sample_results.json). [Methodology](docs/METHODOLOGY.md) defines score denominators, model preprocessing, SQL eligibility, cleaning order, and export behavior.
+## How It Works
 
-## Architecture
+Using DataGuard AI is straightforward:
 
-```text
-app/main.py                 Streamlit entry point, shared dataset selector and routing
-app/app_pages/              Eight page scripts
-app/state.py                Per-session source/current copies and revision lifecycle
-src/dataguard/
-  ingestion.py              Strict, bounded CSV parsing
-  profiling.py              Missingness, dtypes, cardinality, descriptive helpers
-  validation.py             Rules, findings, and explicit score
-  cleaning.py               Copy-based transformations and operation log
-  anomaly_detection.py      Median imputation + Isolation Forest
-  sql_analytics.py          Temporary relational view and curated queries
-  reporting.py              Strict JSON and CSV exports
-scripts/                    Download, preprocessing, dataset evaluation, browser smoke
-sql/                        Seven reviewed example queries
-tests/                      Synthetic edge cases, real UCI samples, Streamlit workflows
-data/sample/                Attributed real subsets and deterministic provenance
-data/sources.json           Official URLs, citations, licenses, archive hashes
-reports/reference/          Actual measured sample/full results, no full raw records
-docs/                       Dataset, methodology, deployment, Git, and career notes
-```
+1. **Load a dataset:** Choose one of the included samples or upload your own CSV file.
+2. **Explore the data:** Review columns, data types, missing values, and distributions.
+3. **Check data quality:** Identify potential issues using configurable validation rules.
+4. **Detect anomalies:** Run Isolation Forest to flag unusual numerical observations.
+5. **Clean the data:** Preview transformations before applying them.
+6. **Analyze and export:** Use SQL queries and download the results.
 
-Pandas/NumPy implement data processing, scikit-learn provides statistical screening, SQLite demonstrates relational analytics, Plotly renders interactive charts, and pytest/Ruff verify behavior and code quality. Business logic is independent of Streamlit. Public sample bytes alone use a shared bounded cache; uploaded datasets and analysis results remain in per-session memory. SQL uses a fresh private database for each run.
+Anomaly detection is intended to support investigation. A flagged observation is not necessarily an error, and the application does not automatically delete anomalies.
 
-## Verification
+## Testing
+
+I tested the project using automated tests and a local browser workflow.
+
+**Results:**
+
+- 88 automated tests passed
+- Data loading and validation checked
+- Cleaning operations and transformation history tested
+- Anomaly detection reproducibility checked
+- SQL analytics and exports tested
+- Streamlit navigation and application workflows verified
+
+To run the tests:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m ruff check src app scripts tests
-.\.venv\Scripts\python.exe -m ruff format --check src app scripts tests
-.\.venv\Scripts\python.exe -m pip check
 ```
 
-The final local run passed **88 tests**. Tests cover ingestion/encoding/limits, missingness/repeats, types/dates/ranges/categories, empty/all-null/constant data, cleaning logs and immutability, reproducible anomaly screening, SQL safety/joins/aggregations, exports, dataset hashes, all EDA variants, and UI navigation/revision workflows. Fixtures labeled synthetic are used for controlled errors; real-sample tests use only attributed UCI records. GitHub Actions is configured; a remote CI run is not claimed before publication.
+## Current Limitations
 
-For the optional real-browser check and screenshot regeneration, with Chrome/Chromium/Edge installed:
+DataGuard AI is a portfolio project, not a production data management platform.
 
-```powershell
-.\.venv\Scripts\python.exe -m scripts.browser_smoke
-```
+A few things to keep in mind:
 
-This starts a temporary localhost server and headless browser with a fresh profile, verifies the running app, and writes actual screenshots to `assets/screenshots/` and a local report under `reports/local/`. It closes its own processes. The completed local run verified rendered charts, model execution, fresh dataset/anomaly CSV downloads, real-sample upload, malformed-upload rejection, and a mobile export viewport; [browser evidence](reports/reference/browser_smoke.json) is included. See [FINAL_AUDIT.md](FINAL_AUDIT.md) for the exact completed checks and remaining verification limits.
+- Anomaly detection identifies unusual observations, not confirmed errors.
+- The quality score is a helpful summary, but individual issues still need review.
+- Interactive uploads and model execution have size limits.
+- Session data is temporary, so results should be exported before leaving.
+- The application does not include user authentication or permanent data storage.
 
-## Limits and deployment
+For public deployments, use non-sensitive datasets.
 
-- Statistical flags are exploratory, with no verified error labels or held-out predictive evaluation. Different features, seeds, imputation, cohorts, or thresholds can change results.
-- A project-defined quality score is not a guarantee. Missing identifiers cannot be safely invented; repeated transactions and returns require domain review.
-- Interactive CSVs are limited to 25 MiB / 200,000 rows / 250 columns; model fitting is limited to 10–50,000 rows and charts use bounded samples.
-- Per-tab session state is temporary. Refreshes/reconnects/server restarts can lose work. Download accepted results before leaving.
-- This app sends uploaded data to its hosting server for processing. It has no authentication, tenant isolation guarantee, or persistent audit store. Use public/non-sensitive demo data for a public deployment.
-- Generic feature suitability and validity rules require analyst judgment. No automatic customer identity inference, anomaly deletion, or source-file writeback is provided.
+## Future Improvements
 
-The repository is prepared for Streamlit Community Cloud with entry point `app/main.py`, Python 3.12, root `requirements.txt`, and committed samples. See [deployment steps](docs/DEPLOYMENT.md). No app has been published and no public URL exists.
+Some features I'd like to explore next:
 
-Future improvements include versioned rule configuration, richer per-field weighting, saved reviewed decisions, batch ingestion, held-out monitoring when appropriate labels exist, and authenticated storage for a separately designed production service.
+- More customizable data quality rules
+- Additional anomaly detection methods
+- Better comparison of datasets before and after cleaning
+- Saved analysis sessions
+- More advanced reporting and dashboards
 
-## GitHub and portfolio
+## About This Project
 
-[Git review and publication commands](docs/GITHUB.md) are provided for manual execution after approval. A clean local initial commit is prepared on `main`; no remote, push, or public deployment has been created. [Publication audit evidence](reports/reference/publication_audit.json) records the clean-environment checks, screenshot hashes, ignore checks, and credential-pattern scan. [Career notes](docs/CAREER_NOTES.md) contain three implementation-based CV bullets and five technical interview answers. This project does not claim commercial employment, customers, revenue gains, or production adoption.
+I developed DataGuard AI as a hands-on project to strengthen my skills in **Data Analytics, Python, Machine Learning, and Business Intelligence**.
 
-Code: [MIT](LICENSE). Bundled UCI samples: [CC BY 4.0 with attribution](data/LICENSE_DATA.md). Third-party dependencies retain their own licenses.
+Rather than working only with clean datasets, I wanted to build something that addresses a common challenge in real data projects: understanding and improving data quality before drawing conclusions.
+
+This project gave me practical experience with data validation, exploratory analysis, anomaly detection, SQL, application development, and automated testing.
+
+## License
+
+The application code is available under the [MIT License](LICENSE).
+
+The included UCI dataset samples are provided under [CC BY 4.0](data/LICENSE_DATA.md), with attribution to their original authors.
